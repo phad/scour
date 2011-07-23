@@ -1,0 +1,6 @@
+#! /usr/bin/env ruby
+
+require File.expand_path('../lib/scour', File.dirname(__FILE__))
+
+scourer = Scour::Scourer.new(STDOUT)
+scourer.search ARGV

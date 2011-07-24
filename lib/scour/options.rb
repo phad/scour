@@ -16,10 +16,6 @@ module Scour
             options.direction = direction
           end
 
-          opts.on('-f', '--files', 'Search for files matching query') do |file_search|
-            options.file_search = file_search
-          end
-
           opts.on('-h', '--help', 'Show this message') do
             puts opts
             exit
@@ -34,9 +30,8 @@ module Scour
 
       def default_options
         OpenStruct.new({
-          :direction    => :dependencies,
-          :recurse      => false,
-          :file_search  => false
+          :direction  => :dependencies,
+          :recurse     => false,
         })
       end
 

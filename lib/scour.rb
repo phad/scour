@@ -1,8 +1,14 @@
-module Scour
-  SCOUR_DIR = File.expand_path('scour', File.dirname(__FILE__))
+require 'fileutils'
+require 'optparse'
+require 'ostruct'
+require 'term/ansicolor'
+require 'yaml'
 
-  require SCOUR_DIR + '/scourer'
-  require SCOUR_DIR + '/options'
-  require SCOUR_DIR + '/project_graph'
-  require SCOUR_DIR + '/project'
+module Scour
+  ROOT = File.expand_path(File.dirname(__FILE__))
+
+  autoload :Options,      ROOT + '/scour/options'
+  autoload :Project,      ROOT + '/scour/project'
+  autoload :ProjectGraph, ROOT + '/scour/project_graph'
+  autoload :Scourer,      ROOT + '/scour/scourer'
 end

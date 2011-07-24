@@ -1,6 +1,3 @@
-require 'ostruct'
-require 'optparse'
-
 module Scour
   class Options
 

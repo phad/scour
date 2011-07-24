@@ -1,35 +1,19 @@
-require 'yaml'
-
 module Scour
   class ProjectGraph
+    DEPS = 'deps.yml'
 
     class << self
       def for_direction(direction)
         new direction
       end
 
-      def path_to_project(project_name)
-        project = known_projects.detect { |name, path| name == project_name }
-
-        if project
-          File.expand_path(project.last)
-        end
-      end
-
-      def project_name_from_path(project_path)
-        project = known_projects.detect do |name, path|
-          File.expand_path(path) == File.expand_path(project_path)
-        end
-
-        if project
-          project.first
-        end
-      end
-
       def known_projects
         @known_projects ||= begin
           project_index = ENV['PROJECT_INDEX']
-          YAML.load_file(File.expand_path(project_index))
+          project_paths = YAML.load_file(File.expand_path(project_index))
+          project_paths.map do |name, path|
+            Project.new(name, File.expand_path(path))
+          end
         end
       end
     end
@@ -47,9 +31,8 @@ module Scour
     def focused_project
       deps_file = focused_project_deps_file
       path      = File.dirname(deps_file)
-      name      = ProjectGraph.project_name_from_path(path)
 
-      Project.new(name, path)
+      ProjectGraph.known_projects.detect { |project| File.identical?(path, project.path) }
     end
 
     def focused_project_deps_file
@@ -57,7 +40,7 @@ module Scour
       root_dir = '/'
 
       while dir != root_dir do
-        deps_file = File.join(dir, 'deps.yml')
+        deps_file = File.join(dir, DEPS)
         return deps_file if File.exist?(deps_file)
 
         dir = File.dirname(dir)

@@ -7,27 +7,23 @@ module Scour
       @path = path
     end
 
-    def dependencies
-      deps_file = File.join(File.expand_path(@path), 'deps.yml')
+    def depends_on?(project)
+      dependencies.include?(project)
+    end
 
-      YAML.load_file(deps_file)['projects'].map do |name|
-        path = ProjectGraph.path_to_project(name)
-        Project.new(name, path)
+    def dependencies
+      return @dependencies if @dependencies
+
+      deps_file = File.join(File.expand_path(@path), ProjectGraph::DEPS)
+      names     = YAML.load_file(deps_file)['projects']
+
+      names.map do |name|
+        ProjectGraph.known_projects.detect { |project| project.name == name }
       end
     end
 
     def dependents
-      candidates = ProjectGraph.known_projects.reject { |name, _| name == @name }
-      dependents = candidates.select { |_, path| depends_on_project?(path) }
-
-      dependents.map { |name, path| Project.new(name, path) }
-    end
-
-    private
-
-    def depends_on_project?(path)
-      deps_file = File.join(File.expand_path(path), 'deps.yml')
-      YAML.load_file(deps_file)['projects'].include?(@name)
+      @dependents ||= ProjectGraph.known_projects.select { |project| project.depends_on?(self) }
     end
   end
 end

@@ -1,6 +1,3 @@
-require 'fileutils'
-require 'term/ansicolor'
-
 module Scour
   class Scourer
     include Term::ANSIColor
@@ -41,8 +38,8 @@ module Scour
     end
 
     def output_project_name
-      project_name = @current_project.name.ljust(80)
-      project_name = bold(blue( "#{project_name}\n#{'#' * 80}" ))
+      separator    = '#' * @current_project.name.size
+      project_name = bold(blue( "#{separator}\n#{@current_project.name}\n#{separator}" ))
 
       @output.puts project_name
     end

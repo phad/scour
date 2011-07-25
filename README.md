@@ -1,5 +1,3 @@
 # scour
 
-## TODO
-
- * Implement recursive search of dependencies or dependents
+Not really ready for anything yet. Just walk on by.

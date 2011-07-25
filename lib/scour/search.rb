@@ -1,12 +1,12 @@
 module Scour
-  class Scourer
+  class Search
     include Term::ANSIColor
 
     def initialize(output)
       @output = output
     end
 
-    def search(args)
+    def for(args)
       @options = Options.parse!(args)
       @query   = args.first
 

@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.email         = 'grillpanda@gmail.com'
   s.homepage      = 'https://github.com/grillpanda/scour'
 
-  s.executables   = ['scour']
+  s.executables   = ['scour', 'scour-tags']
   s.files         = %w(README.md) + Dir['{bin,lib}/**/*']
   s.require_paths = ['lib']
 

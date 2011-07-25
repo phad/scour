@@ -1,0 +1,6 @@
+#! /usr/bin/env ruby
+
+require File.expand_path('../lib/scour', File.dirname(__FILE__))
+
+tagger = Scour::Tagger.new(STDOUT)
+tagger.write_tags(ARGV)

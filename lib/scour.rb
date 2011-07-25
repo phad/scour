@@ -10,4 +10,5 @@ module Scour
   autoload :Options,  ROOT + '/scour/options'
   autoload :Project,  ROOT + '/scour/project'
   autoload :Search,   ROOT + '/scour/search'
+  autoload :Tagger,   ROOT + '/scour/tagger'
 end

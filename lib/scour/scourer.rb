@@ -15,17 +15,13 @@ module Scour
         return
       end
 
-      project_graph.projects.each do |project|
+      Project.projects(@options.direction).each do |project|
         @current_project = project
         FileUtils.cd(@current_project.path) { search_project }
       end
     end
 
     private
-
-    def project_graph
-      @project_graph ||= ProjectGraph.for_direction(@options.direction)
-    end
 
     def search_project
       output_project_name

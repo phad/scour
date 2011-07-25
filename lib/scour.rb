@@ -9,6 +9,5 @@ module Scour
 
   autoload :Options,      ROOT + '/scour/options'
   autoload :Project,      ROOT + '/scour/project'
-  autoload :ProjectGraph, ROOT + '/scour/project_graph'
   autoload :Scourer,      ROOT + '/scour/scourer'
 end

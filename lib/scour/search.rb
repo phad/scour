@@ -43,8 +43,9 @@ module Scour
     def search_command
       # -I      exclude binary files
       # --null  use \0 to seperate files and line numbers
+      # -n      show line numbers for results (--line-number is absent for older gits)
       # -C      lines of context around result
-      "GIT_PAGER='' git grep --color -I --full-name --line-number --null -C 1 #{@query}"
+      "GIT_PAGER='' git grep --color -I --full-name -n --null -C 1 #{@query}"
     end
 
     def parse_search_results(io)

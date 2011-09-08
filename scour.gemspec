@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'scour'
-  s.version       = '0.1.0'
+  s.version       = '0.2.0'
   s.summary       = 'Scour interdependent git projects for text.'
   s.author        = 'Matt Johnson'
   s.email         = 'grillpanda@gmail.com'

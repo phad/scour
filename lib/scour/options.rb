@@ -16,6 +16,10 @@ module Scour
             options.direction = direction
           end
 
+          opts.on('-p', '--pathspec PATHSPEC', 'Pathspec') do |pathspec|
+            options.pathspec = pathspec
+          end
+
           opts.on('-h', '--help', 'Show this message') do
             puts opts
             exit
@@ -31,7 +35,8 @@ module Scour
       def default_options
         OpenStruct.new({
           :direction  => :dependencies,
-          :recurse     => false,
+          :recurse    => false,
+          :pathspec   => nil
         })
       end
 
